@@ -1,6 +1,5 @@
 # 江江的个人主页
 
-![预览图](https://socialify.git.ci/GSQZ/SayqzHomePages/image?description=1&font=KoHo&language=1&name=1&owner=1&pattern=Circuit%20Board&theme=Dark)
 
 这是一个使用纯 HTML5、CSS3 和 JavaScript 构建的个人主页，采用现代化设计风格，具有响应式布局和优雅的动画效果。
 
