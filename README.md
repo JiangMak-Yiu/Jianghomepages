@@ -50,7 +50,7 @@ JiangJiangHomePage/
 
 1. 克隆仓库
 ```bash
-git clone https://github.com/GSQZ/JiangJiangHomePage.git
+git clone https://github.com/JiangMak-Yiu/Jianghomepages.git
 ```
 
 2. 进入项目目录
