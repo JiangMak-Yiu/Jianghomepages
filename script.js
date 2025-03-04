@@ -80,6 +80,8 @@ document.addEventListener('DOMContentLoaded', () => {
         'wzys.us.kg'
     ];
 
+    let fastestDomain = null;  // 存储最快域名
+
     async function checkDomain(domain) {
         const startTime = performance.now();
         try {
@@ -106,6 +108,10 @@ document.addEventListener('DOMContentLoaded', () => {
         const siteTitle = document.querySelector('#wzys-link .site-title');
         const link = document.querySelector('#wzys-link');
         
+        if (fastestDomain) {  // 如果已有检测结果，直接返回
+            return fastestDomain;
+        }
+        
         siteTitle.textContent = '蚊子影视 (检测中...)';
         
         try {
@@ -115,6 +121,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 .sort((a, b) => a.delay - b.delay)[0];
             
             if (fastest) {
+                fastestDomain = fastest.domain;  // 保存检测结果
                 siteTitle.textContent = `蚊子影视 (${Math.round(fastest.delay)}ms)`;
                 link.href = `https://${fastest.domain}`;
                 return fastest.domain;
@@ -128,15 +135,17 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // 立即开始第一次检测
-    findFastestDomain();
+    document.addEventListener('DOMContentLoaded', findFastestDomain);
 
-    // 点击时重新检测并跳转
     document.querySelector('#wzys-link').addEventListener('click', async (e) => {
         e.preventDefault();
-        const fastestDomain = await findFastestDomain();
         if (fastestDomain) {
             window.open(`https://${fastestDomain}`, '_blank');
+        } else {
+            const domain = await findFastestDomain();
+            if (domain) {
+                window.open(`https://${domain}`, '_blank');
+            }
         }
     });
 }); 
