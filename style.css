@@ -1858,6 +1858,7 @@ footer {
         flex-direction: column;
         text-align: center;
         gap: 1.5rem;
+        padding: 1.5rem 1rem;
     }
     
     .footer-info {
@@ -1903,62 +1904,63 @@ footer {
     }
 }
 
+/* 主页卡片布局 */
 .site-cards {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(3, 1fr);  /* 默认3列 */
     gap: 1.5rem;
     margin-top: 2rem;
     padding: 0 1rem;
 }
 
-.site-card {
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 12px;
-    padding: 1.5rem;
-    text-align: center;
-    transition: all 0.3s ease;
-    text-decoration: none;
-    backdrop-filter: blur(10px);
-}
-
-.site-card:hover {
-    transform: translateY(-5px);
-    background: rgba(255, 255, 255, 0.1);
-    border-color: var(--accent-color);
-}
-
-.site-card i {
-    font-size: 2rem;
-    color: var(--accent-color);
-    margin-bottom: 1rem;
-}
-
-.site-card h3 {
-    color: var(--text-primary);
-    font-size: 1.2rem;
-    margin-bottom: 0.5rem;
-}
-
-.site-card p {
-    color: var(--text-secondary);
-    font-size: 0.9rem;
-}
-
+/* 移动端适配 */
 @media (max-width: 768px) {
     .site-cards {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(2, 1fr);  /* 平板2列 */
         gap: 1rem;
+        padding: 0 0.8rem;
     }
     
     .site-card {
-        padding: 1.2rem;
+        padding: 1rem;
+    }
+
+    .site-card i {
+        font-size: 1.8rem;
+    }
+
+    .site-card h3 {
+        font-size: 1.1rem;
+    }
+
+    .site-card p {
+        font-size: 0.85rem;
     }
 }
 
 @media (max-width: 480px) {
     .site-cards {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(2, 1fr);  /* 手机保持2列 */
+        gap: 0.8rem;
+        padding: 0 0.5rem;
+    }
+
+    .site-card {
+        padding: 0.8rem;
+    }
+
+    .site-card i {
+        font-size: 1.6rem;
+        margin-bottom: 0.8rem;
+    }
+
+    .site-card h3 {
+        font-size: 1rem;
+        margin-bottom: 0.3rem;
+    }
+
+    .site-card p {
+        font-size: 0.8rem;
     }
 }
 
@@ -1978,5 +1980,571 @@ footer {
 @media (max-width: 480px) {
     .wave-emoji {
         font-size: 2rem;
+    }
+}
+
+/* 友链容器 */
+.flink-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+}
+
+.flink h2 {
+    font-size: 1.8rem;
+    color: var(--text-primary);
+    margin: 2rem 0 1.5rem;
+    padding-left: 1rem;
+    border-left: 4px solid var(--accent-color);
+}
+
+.flink .site-card {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    text-decoration: none;
+    backdrop-filter: blur(10px);
+    margin: 0;
+    height: auto;
+    width: 100%;
+    display: block;
+    padding: 0;
+}
+
+/* 推荐网站卡片 */
+.flexcard-flink-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.flexcard-flink-list .site-card {
+    height: 300px;
+    position: relative;
+    overflow: hidden;
+}
+
+.flexcard-flink-list .wrapper.cover {
+    height: 235px;
+    overflow: hidden;
+}
+
+.flexcard-flink-list .cover.fadeIn {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: all 0.6s;
+}
+
+/* 推荐网站卡片遮罩 */
+.flexcard-flink-list .cover-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 235px;
+    background: rgba(0,0,0,0.75);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 1 !important;
+    transform: translateY(0);
+    transition: all 0.3s ease;
+}
+
+.flexcard-flink-list .site-card:hover .cover-overlay {
+    opacity: 0 !important;
+    transform: translateY(-100%);
+}
+
+/* 遮罩内容样式 */
+.flexcard-flink-list .cover-info {
+    text-align: center;
+    color: white;
+    transform: translateY(0);
+    transition: all 0.3s ease;
+}
+
+.flexcard-flink-list .site-card:hover .cover-info {
+    opacity: 0;
+    transform: translateY(-30px);
+}
+
+/* 底部信息栏样式 */
+.flexcard-flink-list .info {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 15px;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(10px);
+}
+
+/* 项目卡片 */
+.telescopic-flink-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.telescopic-flink-list .site-card {
+    height: 150px;
+    position: relative;
+    overflow: hidden;
+    padding: 0;
+    display: block;
+}
+
+.telescopic-flink-list .wrapper.cover {
+    height: 100%;
+    position: relative;
+}
+
+.telescopic-flink-list .cover.fadeIn {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.telescopic-flink-list .info {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 15px;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(10px);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.telescopic-flink-list .flink-avatar {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+}
+
+.telescopic-flink-list .site-descr {
+    color: var(--text-primary);
+    font-size: 0.9rem;
+    line-height: 1.4;
+    flex: 1;
+}
+
+/* 悬浮效果 */
+.telescopic-flink-list .site-card:hover .cover.fadeIn {
+    transform: scale(1.1);
+}
+
+.telescopic-flink-list .site-card:hover .info {
+    background: rgba(0, 0, 0, 0.8);
+}
+
+/* 通用卡片样式 */
+.flink .site-card:hover {
+    transform: translateY(-5px);
+    background: rgba(255, 255, 255, 0.1);
+    border-color: var(--accent-color);
+}
+
+.flink .cover.fadeIn {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: all 0.6s;
+}
+
+.flink .cover-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 235px;
+    background: rgba(0,0,0,0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: all 0.3s;
+}
+
+.flink .site-card:hover .cover-overlay {
+    opacity: 1;
+}
+
+.flink .cover-info {
+    text-align: center;
+    color: white;
+}
+
+.flink .overlay-avatar {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+}
+
+.flink .info {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    gap: 10px;
+}
+
+.flink .flink-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+.flink .site-title {
+    color: var(--text-primary);
+    font-size: 1.1rem;
+}
+
+.flink .site-name {
+    display: block;
+    font-size: 1.2em;
+    margin-bottom: 5px;
+}
+
+.flink .site-desc {
+    font-size: 0.9em;
+    opacity: 0.8;
+}
+
+.flink .site-descr {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+    .flexcard-flink-list,
+    .telescopic-flink-list,
+    .anzhiyu-flink-list {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.8rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .flexcard-flink-list,
+    .telescopic-flink-list,
+    .anzhiyu-flink-list {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* 小伙伴卡片 */
+.anzhiyu-flink-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.anzhiyu-flink-list .site-card {
+    flex: 0 0 auto;
+    width: auto;
+    min-width: 150px;
+    padding: 0.8rem 1.2rem;
+    height: auto;
+    display: flex;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+}
+
+.anzhiyu-flink-list .info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 0;
+}
+
+.anzhiyu-flink-list .flink-avatar {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    transition: all 0.6s ease;
+}
+
+.anzhiyu-flink-list .site-title {
+    color: var(--text-primary);
+    font-size: 1rem;
+    white-space: nowrap;
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+    .anzhiyu-flink-list {
+        justify-content: flex-start;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        padding-bottom: 10px;
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    .anzhiyu-flink-list::-webkit-scrollbar {
+        height: 4px;
+    }
+
+    .anzhiyu-flink-list::-webkit-scrollbar-thumb {
+        background: var(--accent-color);
+        border-radius: 2px;
+    }
+
+    .anzhiyu-flink-list .site-card {
+        flex: 0 0 auto;
+        margin-right: 0.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .anzhiyu-flink-list .site-card {
+        min-width: 130px;
+        padding: 0.6rem 0.8rem;
+    }
+    
+    .anzhiyu-flink-list .flink-avatar {
+        width: 30px;
+        height: 30px;
+    }
+    
+    .anzhiyu-flink-list .site-title {
+        font-size: 0.9rem;
+    }
+}
+
+/* 项目卡片头像动画 */
+.telescopic-flink-list .flink-avatar,
+.anzhiyu-flink-list .flink-avatar {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+}
+
+.telescopic-flink-list .site-card:hover .flink-avatar,
+.anzhiyu-flink-list .site-card:hover .flink-avatar {
+    transform: rotate(360deg);
+}
+
+/* 访问统计样式 */
+.footer-stats {
+    display: flex;
+    gap: 2rem;
+    text-align: center;
+}
+
+.stats-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+.stats-item i {
+    color: var(--accent-color);
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+    .footer-main {
+        flex-direction: column;
+        text-align: center;
+        gap: 1.5rem;
+        padding: 1.5rem 1rem;
+    }
+
+    .footer-stats {
+        flex-direction: row;
+        justify-content: center;
+        gap: 2rem;
+        padding: 0.5rem 0;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        width: 100%;
+    }
+
+    .flexcard-flink-list .site-card {
+        height: 250px;
+    }
+
+    .flexcard-flink-list .wrapper.cover {
+        height: 185px;
+    }
+
+    .flexcard-flink-list .cover-overlay {
+        height: 185px;
+    }
+
+    .flexcard-flink-list .overlay-avatar {
+        width: 50px;
+        height: 50px;
+    }
+
+    .flexcard-flink-list .site-name {
+        font-size: 1.1em;
+    }
+
+    .telescopic-flink-list .site-card {
+        height: 120px;
+    }
+
+    .telescopic-flink-list .site-descr {
+        font-size: 0.85rem;
+    }
+
+    .anzhiyu-flink-list {
+        justify-content: flex-start;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        padding-bottom: 10px;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .anzhiyu-flink-list::-webkit-scrollbar {
+        height: 4px;
+    }
+
+    .anzhiyu-flink-list::-webkit-scrollbar-thumb {
+        background: var(--accent-color);
+        border-radius: 2px;
+    }
+
+    .anzhiyu-flink-list .site-card {
+        flex: 0 0 auto;
+        margin-right: 0.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .footer-stats {
+        flex-direction: column;
+        gap: 0.8rem;
+    }
+
+    .flexcard-flink-list .site-card {
+        height: 220px;
+    }
+
+    .flexcard-flink-list .wrapper.cover {
+        height: 155px;
+    }
+
+    .flexcard-flink-list .cover-overlay {
+        height: 155px;
+    }
+
+    .telescopic-flink-list .site-card {
+        height: 100px;
+    }
+
+    .telescopic-flink-list .flink-avatar {
+        width: 30px;
+        height: 30px;
+    }
+}
+
+/* 移动端优化 */
+@media (max-width: 768px) {
+    /* 页面整体调整 */
+    .content {
+        padding: 1rem;
+    }
+
+    /* 所有卡片列表改为2列 */
+    .flexcard-flink-list,
+    .telescopic-flink-list,
+    .anzhiyu-flink-list {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.8rem;
+    }
+
+    /* 其他移动端样式... */
+}
+
+@media (max-width: 480px) {
+    .flexcard-flink-list .site-card {
+        height: 160px;
+    }
+
+}
+
+/* 主页卡片基础样式 */
+.site-cards .site-card {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 1.5rem;  /* 添加回内边距 */
+    text-align: center;  /* 添加回文字居中 */
+    transition: all 0.3s ease;  /* 添加回过渡效果 */
+    text-decoration: none;
+    backdrop-filter: blur(10px);
+    transform: translateZ(0);
+    will-change: transform;
+}
+
+.site-cards .site-card:hover {
+    transform: translateY(-5px) translateZ(0);
+    background: rgba(255, 255, 255, 0.1);
+    border-color: var(--accent-color);
+}
+
+.site-cards .site-card i {
+    font-size: 2rem;
+    color: var(--accent-color);
+    margin-bottom: 1rem;
+}
+
+.site-cards .site-card h3 {
+    color: var(--text-primary);
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+}
+
+.site-cards .site-card p {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+
+/* 移动端适配 */
+@media (max-width: 768px) {
+    .site-cards {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+    }
+    
+    .site-card {
+        padding: 1.2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .site-card {
+        padding: 1rem;
+    }
+
+    .site-card i {
+        font-size: 1.8rem;
+        margin-bottom: 0.8rem;
+    }
+
+    .site-card h3 {
+        font-size: 1.1rem;
+        margin-bottom: 0.3rem;
+    }
+
+    .site-card p {
+        font-size: 0.85rem;
     }
 }
