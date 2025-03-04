@@ -1,6 +1,5 @@
 # 江江的个人主页
 
-![预览图](https://socialify.git.ci/GSQZ/SayqzHomePages/image?description=1&font=KoHo&language=1&name=1&owner=1&pattern=Circuit%20Board&theme=Dark)
 
 这是一个使用纯 HTML5、CSS3 和 JavaScript 构建的个人主页，采用现代化设计风格，具有响应式布局和优雅的动画效果。
 
@@ -17,7 +16,7 @@
 
 ## 🚀 在线预览
 
-访问 [www.江江.icu](https://www.江江.icu) 查看在线演示
+访问 [江江.icu](https://江江.icu) 查看在线演示
 
 ## 🛠️ 技术栈
 
@@ -50,12 +49,12 @@ JiangJiangHomePage/
 
 1. 克隆仓库
 ```bash
-git clone https://github.com/GSQZ/JiangJiangHomePage.git
+git clone https://github.com/JiangMak-Yiu/Jianghomepages.git
 ```
 
 2. 进入项目目录
 ```bash
-cd JiangJiangHomePage
+cd Jianghomepages
 ```
 
 3. 使用浏览器打开 `index.html` 文件即可预览
