@@ -67,29 +67,31 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // 域名检测功能
+    // 将域名检测相关代码移到全局作用域
     const domains = [
         'wz.wzfei.xyz',
-        'hnwzys.us.kg',
-        'wzfei.xyz',
-        'wzys2025.us.kg',
-        'wzys2088.cf',
-        'wzys2088.gq',
-        'wzys2088.tk',
-        'wzysa.fun',
-        'wzys.us.kg'
+        'wz.hnwzys.us.kg',
+        'wz.wzfei.xyz',
+        'wz.wzys2025.us.kg',
+        'wz.wzys2088.cf',
+        'wz.wzys2088.gq',
+        'wz.wzys2088.tk',
+        'wz.wzysa.fun',
+        'wz.wzys.us.kg'
     ];
 
-    let fastestDomain = null;  // 存储最快域名
+    let availableDomain = null;
 
     async function checkDomain(domain) {
         const startTime = performance.now();
         try {
-            const response = await fetch(`https://${domain}`, {
+            const response = await fetch(`https://${domain}/`, {
                 mode: 'no-cors',
-                cache: 'no-store'
+                cache: 'no-store',
+                timeout: 5000
             });
             const endTime = performance.now();
+            // no-cors 模式下，只要没有抛出错误就认为域名可用
             return {
                 domain,
                 delay: endTime - startTime,
@@ -104,48 +106,59 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    async function findFastestDomain() {
+    async function findFirstAvailableDomain() {
         const siteTitle = document.querySelector('#wzys-link .site-title');
         const link = document.querySelector('#wzys-link');
         
-        if (fastestDomain) {  // 如果已有检测结果，直接返回
-            return fastestDomain;
+        if (availableDomain) {
+            return availableDomain;
         }
         
         siteTitle.textContent = '蚊子影视 (检测中...)';
         
         try {
-            const results = await Promise.all(domains.map(domain => checkDomain(domain)));
-            const fastest = results
-                .filter(result => result.status === 'success')
-                .sort((a, b) => a.delay - b.delay)[0];
+            // 创建所有检测Promise
+            const promises = domains.map(async domain => {
+                const result = await checkDomain(domain);
+                if (result.status === 'success') {
+                    return result;
+                }
+                throw new Error(`Domain ${domain} failed`);
+            });
+
+            // 使用 Promise.any 等待第一个成功的结果
+            const result = await Promise.any(promises);
             
-            if (fastest) {
-                fastestDomain = fastest.domain;  // 保存检测结果
-                siteTitle.textContent = `蚊子影视 (${Math.round(fastest.delay)}ms)`;
-                link.href = `https://${fastest.domain}`;
-                return fastest.domain;
-            } else {
-                siteTitle.textContent = '蚊子影视 (无可用线路)';
-                return null;
-            }
+            availableDomain = result.domain;
+            siteTitle.textContent = `蚊子影视 (${Math.round(result.delay)}ms)`;
+            link.href = `https://${result.domain}`;
+            return result.domain;
         } catch (error) {
-            siteTitle.textContent = '蚊子影视 (检测失败)';
+            siteTitle.textContent = '蚊子影视 (无可用线路)';
+            console.error('所有域名检测失败:', error);
             return null;
         }
     }
 
-    document.addEventListener('DOMContentLoaded', findFastestDomain);
+    // 开始域名检测
+    findFirstAvailableDomain();
 
+    // 点击事件处理
     document.querySelector('#wzys-link').addEventListener('click', async (e) => {
         e.preventDefault();
-        if (fastestDomain) {
-            window.open(`https://${fastestDomain}`, '_blank');
+        
+        // 如果已有可用域名，直接使用
+        if (availableDomain) {
+            window.open(`https://${availableDomain}`, '_blank');
+            return;
+        }
+        
+        // 否则重新检测
+        const domain = await findFirstAvailableDomain();
+        if (domain) {
+            window.open(`https://${domain}`, '_blank');
         } else {
-            const domain = await findFastestDomain();
-            if (domain) {
-                window.open(`https://${domain}`, '_blank');
-            }
+            console.error('无法找到可用域名');
         }
     });
 }); 

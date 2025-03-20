@@ -1,6 +1,5 @@
 # 江江的个人主页
 
-
 这是一个使用纯 HTML5、CSS3 和 JavaScript 构建的个人主页，采用现代化设计风格，具有响应式布局和优雅的动画效果。
 
 ## ✨ 特点
@@ -16,7 +15,7 @@
 
 ## 🚀 在线预览
 
-访问 [江江.icu](https://江江.icu) 查看在线演示
+访问 [江江.icu](江江.icu) 查看在线演示
 
 ## 🛠️ 技术栈
 
@@ -49,7 +48,7 @@ JiangJiangHomePage/
 
 1. 克隆仓库
 ```bash
-git clone https://github.com/JiangMak-Yiu/Jianghomepages.git
+git clone https://github.com/GSQZ/Jianghomepages.git
 ```
 
 2. 进入项目目录
@@ -81,4 +80,3 @@ cd Jianghomepages
 ## 📧 联系方式
 
 - Email: jiangjiangbs@qq.com
-- GitHub: [@GSQZ](https://github.com/JiangMak-Yiu) 

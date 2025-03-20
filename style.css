@@ -2548,3 +2548,185 @@ footer {
         font-size: 0.85rem;
     }
 }
+
+/* 移动端卡片布局优化 */
+@media (max-width: 768px) {
+    /* 统一卡片列表为两列布局 */
+    .flexcard-flink-list,
+    .telescopic-flink-list {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.8rem;
+    }
+    
+    /* 推荐网站卡片高度优化 */
+    .flexcard-flink-list .site-card {
+        height: auto;
+        min-height: 200px;
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .flexcard-flink-list .wrapper.cover {
+        height: 140px;
+        min-height: 0;
+    }
+    
+    .flexcard-flink-list .cover-overlay {
+        height: 140px;
+    }
+    
+    /* 增强小屏幕上的信息可读性 */
+    .flexcard-flink-list .info {
+        padding: 10px;
+        height: auto;
+    }
+    
+    .flexcard-flink-list .site-title {
+        font-size: 0.95rem;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    
+    .flexcard-flink-list .site-descr {
+        font-size: 0.85rem;
+        max-height: 2.8em;
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+    }
+    
+    /* 项目卡片适配优化 */
+    .telescopic-flink-list .site-card {
+        height: auto;
+        aspect-ratio: 16/9;
+    }
+    
+    /* 小伙伴卡片横向滚动优化 */
+    .anzhiyu-flink-list {
+        display: flex;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        padding-bottom: 10px;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: thin;
+        gap: 0.8rem;
+    }
+    
+    .anzhiyu-flink-list::-webkit-scrollbar {
+        height: 4px;
+    }
+    
+    .anzhiyu-flink-list::-webkit-scrollbar-thumb {
+        background: var(--accent-color);
+        border-radius: 2px;
+    }
+    
+    .anzhiyu-flink-list .site-card {
+        flex: 0 0 auto;
+        margin-right: 0.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .flexcard-flink-list {
+        grid-template-columns: 1fr;  /* 单列布局提升可读性 */
+    }
+    
+    .flexcard-flink-list .site-card {
+        height: auto;
+        min-height: 180px;
+    }
+    
+    .flexcard-flink-list .wrapper.cover {
+        height: 120px;
+    }
+    
+    .flexcard-flink-list .cover-overlay {
+        height: 120px;
+    }
+    
+    /* 减小头像尺寸 */
+    .flexcard-flink-list .overlay-avatar {
+        width: 40px;
+        height: 40px;
+    }
+    
+    /* 项目卡片在超小屏幕上保持两列 */
+    .telescopic-flink-list {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.6rem;
+    }
+    
+    .telescopic-flink-list .site-card {
+        aspect-ratio: 3/2;
+    }
+    
+    /* 优化卡片文本 */
+    .telescopic-flink-list .site-descr {
+        display: none;  /* 超小屏幕隐藏描述文本 */
+    }
+    
+    .telescopic-flink-list .info {
+        padding: 8px;
+    }
+    
+    .telescopic-flink-list .site-title {
+        font-size: 0.85rem;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    
+    /* 小伙伴卡片在超小屏幕上的优化 */
+    .anzhiyu-flink-list .site-card {
+        min-width: 120px;
+        padding: 0.5rem 0.7rem;
+    }
+    
+    .anzhiyu-flink-list .flink-avatar {
+        width: 28px;
+        height: 28px;
+    }
+    
+    .anzhiyu-flink-list .site-title {
+        font-size: 0.85rem;
+    }
+}
+
+/* 卡片内容溢出保护 */
+.site-card .site-title,
+.site-card .site-name,
+.site-card .site-desc {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.site-card .site-descr {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+/* 优化图片加载性能 */
+.flink img {
+    transform: translateZ(0);
+    will-change: transform;
+    backface-visibility: hidden;
+}
+
+/* 减轻移动端动画负担 */
+@media (max-width: 768px) {
+    .site-card:hover {
+        transform: translateY(-3px) translateZ(0);
+    }
+    
+    .tech-item:hover,
+    .role-tag:hover,
+    .footer-link:hover {
+        transform: translateY(-2px);
+    }
+}
